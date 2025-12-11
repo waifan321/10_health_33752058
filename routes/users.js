@@ -122,11 +122,16 @@ router.post('/loggedin', function(req, res, next) {
         req.session.userId = userId
         req.session.username = username
         
-        const audSql = 'INSERT INTO audit (username, success, ip_address, message) VALUES (?,?,?,?)'
-        const audParams = [username, 1, req.ip, 'login success']
-        db.query(audSql, audParams, (aErr) => {
-          if (aErr) return next(aErr)
-          return res.redirect('/dashboard')
+        // Save session before redirecting
+        req.session.save((saveErr) => {
+          if (saveErr) return next(saveErr)
+          
+          const audSql = 'INSERT INTO audit (username, success, ip_address, message) VALUES (?,?,?,?)'
+          const audParams = [username, 1, req.ip, 'login success']
+          db.query(audSql, audParams, (aErr) => {
+            if (aErr) return next(aErr)
+            return res.redirect('/dashboard')
+          })
         })
       }
       else {
