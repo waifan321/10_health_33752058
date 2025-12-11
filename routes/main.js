@@ -1,24 +1,28 @@
 // Main route module: handles top-level pages like home and about for Health & Fitness Tracker
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Access the global database connection
-const db = global.db
+const db = global.db;
+
+// Base path for Goldsmiths deployment
+// Example: /~wfan002/10_health_33752058
+const BASE = process.env.HEALTH_BASE_PATH || "";
 
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect('/users/login')
+        return res.redirect(BASE + '/users/login');
     }
-    next()
-}
+    next();
+};
 
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
-router.get('/',function(req, res, next){
+router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return res.redirect('/dashboard')
+        return res.redirect(BASE + '/dashboard');
     }
-    res.render('index.ejs')
+    res.render('index.ejs');
 });
 
 // About page route - renders `views/about.ejs`
@@ -45,14 +49,15 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
     });
 });
 
-router.get('/logout', redirectLogin, (req,res) => {
-                req.session.destroy(err => {
-                if (err) {
-                    return res.redirect('./')
-                }
-                res.send('You are now logged out. <a href="/">Home</a>');
-                })
-        })
+// Logout route
+router.get('/logout', redirectLogin, (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect(BASE + '/');
+        }
+        res.send(`You are now logged out. <a href="${BASE}/">Home</a>`);
+    });
+});
 
 // Export the router object so `index.js` can mount it
-module.exports = router
+module.exports = router;
