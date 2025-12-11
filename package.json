@@ -1,0 +1,33 @@
+{
+  "name": "health-fitness-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.6",
+    "express": "^4.18.1",
+    "express-sanitizer": "^1.0.6",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.15.3",
+    "pug": "^3.0.2",
+    "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewfer/gs-dwa-lab-3.1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lewfer/gs-dwa-lab-3.1/issues"
+  },
+  "homepage": "https://github.com/lewfer/gs-dwa-lab-3.1#readme",
+  "description": ""
+}
