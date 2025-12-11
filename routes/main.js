@@ -2,6 +2,9 @@
 const express = require("express")
 const router = express.Router()
 
+// Access the global database connection
+const db = global.db
+
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {

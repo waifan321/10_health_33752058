@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 const { check, validationResult } = require('express-validator');
 
+// Access the global database connection
+const db = global.db
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
