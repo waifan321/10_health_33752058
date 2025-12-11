@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- views/register.ejs - User registration form for Health & Fitness Tracker -->
+<html>
+  <head>
+    <title>Register for <%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px #667eea;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #764ba2;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .password-help {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>📝 Create Your Account</h1>
+        
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+            <div style="background: #ffebee; border-left: 4px solid #d32f2f; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+                <strong style="color: #d32f2f;">Please fix the following errors:</strong>
+                <ul style="margin: 10px 0 0 0; color: #d32f2f;">
+                    <% errors.forEach(function(error) { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <form method="POST" action="registered">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input id="username" type="text" name="username" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input id="password" type="password" name="password" required />
+              <div class="password-help">
+                Min 8 chars, with uppercase, lowercase, number, and special character (@$!%*?&)
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="first">First Name:</label>
+              <input id="first" type="text" name="first" required />
+            </div>
+            <div class="form-group">
+              <label for="last">Last Name:</label>
+              <input id="last" type="text" name="last" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input id="email" type="email" name="email" required />
+            </div>
+            <input type="submit" value="Register" />
+        </form>
+
+        <div class="links">
+          <a href="/">Home</a> | <a href="/users/login">Already have an account? Login</a>
+        </div>
+    </div>
+  </body>
+</html>

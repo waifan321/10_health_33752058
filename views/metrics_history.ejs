@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- views/metrics_history.ejs - Display health metrics history -->
+<html>
+  <head>
+    <title>Health Metrics History</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        .actions {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .actions a {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .actions a:hover {
+            background: #764ba2;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>📋 Your Health Metrics History</h1>
+        
+        <div class="actions">
+            <a href="/metrics/add">+ Add New Metrics</a>
+            <a href="/metrics/report">📊 View Report</a>
+        </div>
+        
+        <% if (metrics && metrics.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight (kg)</th>
+                        <th>Heart Rate (bpm)</th>
+                        <th>Steps</th>
+                        <th>Sleep (hrs)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% metrics.forEach(metric => { %>
+                        <tr>
+                            <td><%= new Date(metric.metric_date).toLocaleDateString() %></td>
+                            <td><%= metric.weight_kg ? metric.weight_kg + ' kg' : '-' %></td>
+                            <td><%= metric.heart_rate ? metric.heart_rate : '-' %></td>
+                            <td><%= metric.steps ? metric.steps.toLocaleString() : '-' %></td>
+                            <td><%= metric.sleep_hours ? metric.sleep_hours + ' hrs' : '-' %></td>
+                            <td><%= metric.notes || '-' %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="no-data">
+                <p>No health metrics recorded yet.</p>
+                <a href="/metrics/add">Add your first metrics →</a>
+            </div>
+        <% } %>
+        
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+  </body>
+</html>

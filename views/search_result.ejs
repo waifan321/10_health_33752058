@@ -1,0 +1,103 @@
+<!doctype html>
+<!-- views/search_result.ejs - Search results for workouts -->
+<html>
+  <head>
+    <title>Search Results - <%= shopData.shopName %></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      h1 {
+        color: #667eea;
+        text-align: center;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      table th, table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      table th {
+        background: #667eea;
+        color: white;
+        font-weight: bold;
+      }
+      table tr:hover {
+        background-color: #f5f5f5;
+      }
+      .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #999;
+      }
+      .back-link {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+      .back-link a {
+        color: #667eea;
+        text-decoration: none;
+        margin: 0 15px;
+      }
+      .back-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔍 Search Results for "<%= term %>"</h1>
+
+      <% if (workouts && workouts.length) { %>
+        <p>Found <strong><%= workouts.length %></strong> workout(s).</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Duration (min)</th>
+              <th>Calories</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% workouts.forEach(function(workout){ %>
+              <tr>
+                <td><%= workout.activity_type %></td>
+                <td><%= workout.duration_minutes %></td>
+                <td><%= workout.calories_burned || '-' %></td>
+                <td><%= new Date(workout.workout_date).toLocaleDateString() %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="no-results">
+          <p>No workouts matched your search for "<%= term %>".</p>
+          <p>Try a different activity type or use advanced search.</p>
+        </div>
+      <% } %>
+
+      <div class="back-link">
+        <a href="/workouts/search">← Back to Search</a> | <a href="/workouts/list">All Workouts</a> | <a href="/">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

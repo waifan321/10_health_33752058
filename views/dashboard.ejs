@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- views/dashboard.ejs - User dashboard showing recent workouts and metrics -->
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            color: #667eea;
+            margin: 0;
+        }
+        .logout {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logout:hover {
+            color: #764ba2;
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .action-btn {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+        }
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .action-btn h3 {
+            color: #667eea;
+            margin: 10px 0 0 0;
+        }
+        .icon {
+            font-size: 2em;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .panel h2 {
+            color: #667eea;
+            margin-top: 0;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th {
+            background: #f5f5f5;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+        .view-all {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .view-all:hover {
+            color: #764ba2;
+        }
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <header>
+            <h1>Welcome Back! 👋</h1>
+            <a href="/logout" class="logout">Logout</a>
+        </header>
+        
+        <div class="actions-grid">
+            <a href="/workouts/addworkout" class="action-btn">
+                <div class="icon">🏃</div>
+                <h3>Log Workout</h3>
+            </a>
+            <a href="/metrics/add" class="action-btn">
+                <div class="icon">📊</div>
+                <h3>Log Metrics</h3>
+            </a>
+            <a href="/workouts/search" class="action-btn">
+                <div class="icon">🔍</div>
+                <h3>Search</h3>
+            </a>
+            <a href="/metrics/report" class="action-btn">
+                <div class="icon">📈</div>
+                <h3>Reports</h3>
+            </a>
+        </div>
+        
+        <div class="content-grid">
+            <div class="panel">
+                <h2>Recent Workouts</h2>
+                <% if (workouts && workouts.length > 0) { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Duration</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% workouts.forEach(workout => { %>
+                                <tr>
+                                    <td><%= workout.activity_type %></td>
+                                    <td><%= workout.duration_minutes %> min</td>
+                                    <td><%= new Date(workout.workout_date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    <a href="/workouts/list" class="view-all">View all workouts →</a>
+                <% } else { %>
+                    <div class="no-data">No workouts logged yet.</div>
+                <% } %>
+            </div>
+            
+            <div class="panel">
+                <h2>Recent Health Metrics</h2>
+                <% if (metrics && metrics.length > 0) { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Weight</th>
+                                <th>HR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% metrics.forEach(metric => { %>
+                                <tr>
+                                    <td><%= new Date(metric.metric_date).toLocaleDateString() %></td>
+                                    <td><%= metric.weight_kg ? metric.weight_kg + ' kg' : '-' %></td>
+                                    <td><%= metric.heart_rate ? metric.heart_rate : '-' %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    <a href="/metrics/history" class="view-all">View all metrics →</a>
+                <% } else { %>
+                    <div class="no-data">No metrics logged yet.</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

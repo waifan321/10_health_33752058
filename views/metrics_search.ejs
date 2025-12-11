@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- views/metrics_search.ejs - Search health metrics -->
+<html>
+  <head>
+    <title>Search Health Metrics</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px #667eea;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .info {
+            background: #e8eef7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            color: #333;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>🔍 Search Health Metrics</h1>
+        
+        <div class="info">
+            <p>Search your health metrics by date range to find trends and patterns in your health data.</p>
+        </div>
+        
+        <form action="/metrics/report" method="get">
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" value="<%= new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0] %>">
+            </div>
+            
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" value="<%= new Date().toISOString().split('T')[0] %>">
+            </div>
+            
+            <button type="submit">Generate Report</button>
+        </form>
+        
+        <div class="back-link">
+            <a href="/metrics/history">← Back to History</a> | <a href="/">Home</a>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- views/login.ejs - User login form for Health & Fitness Tracker -->
+<html>
+  <head>
+    <title>Login - <%= shopData.shopName %></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px #667eea;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #764ba2;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>🔐 Login</h1>
+        <form method="POST" action="loggedin">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input id="username" type="text" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" type="password" name="password" required />
+          </div>
+          <input type="submit" value="Login" />
+        </form>
+
+        <div class="links">
+          <a href="/">Home</a>
+          <a href="/users/register">Register</a>
+          <a href="/users/list">Users</a>
+        </div>
+    </div>
+  </body>
+</html>

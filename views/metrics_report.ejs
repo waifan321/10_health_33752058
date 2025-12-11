@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- views/metrics_report.ejs - Display health metrics report and statistics -->
+<html>
+  <head>
+    <title>Health Metrics Report</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        .date-range {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .actions {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .actions a {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .actions a:hover {
+            background: #764ba2;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>📊 Health Metrics Report</h1>
+        
+        <div class="date-range">
+            <p>Report Period: <strong><%= startDate %></strong> to <strong><%= endDate %></strong></p>
+        </div>
+        
+        <div class="actions">
+            <a href="/metrics/add">+ Add Metrics</a>
+            <a href="/metrics/history">View History</a>
+        </div>
+        
+        <% if (stats.count > 0) { %>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Average Weight</h3>
+                    <div class="value"><%= stats.avgWeight %> kg</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Heart Rate</h3>
+                    <div class="value"><%= stats.avgHeartRate %> bpm</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Steps</h3>
+                    <div class="value"><%= stats.totalSteps.toLocaleString() %></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Sleep</h3>
+                    <div class="value"><%= stats.avgSleep %> hrs</div>
+                </div>
+            </div>
+            
+            <h2>Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight (kg)</th>
+                        <th>Heart Rate (bpm)</th>
+                        <th>Steps</th>
+                        <th>Sleep (hrs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% metrics.forEach(metric => { %>
+                        <tr>
+                            <td><%= new Date(metric.metric_date).toLocaleDateString() %></td>
+                            <td><%= metric.weight_kg ? metric.weight_kg : '-' %></td>
+                            <td><%= metric.heart_rate ? metric.heart_rate : '-' %></td>
+                            <td><%= metric.steps ? metric.steps.toLocaleString() : '-' %></td>
+                            <td><%= metric.sleep_hours ? metric.sleep_hours : '-' %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="no-data">
+                <p>No data available for the selected period.</p>
+                <a href="/metrics/add">Start tracking your health →</a>
+            </div>
+        <% } %>
+        
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+  </body>
+</html>

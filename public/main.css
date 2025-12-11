@@ -1,0 +1,67 @@
+/* public/main.css - basic styling for Bertie's Books */
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: darkcyan;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: cadetblue;
+}
+
+p,li {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Weather card */
+.weather-card {
+  max-width: 720px;
+  margin: 16px 0;
+  padding: 16px;
+  background: linear-gradient(180deg, #f7fbfc 0%, #ffffff 100%);
+  border: 1px solid #e6eef2;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.weather-top { display:flex; align-items:center; gap:12px }
+.weather-temp { font-size: 36px; font-weight: 700; color: #047a8c }
+.weather-desc { text-transform: capitalize; color: #355 }
+.weather-meta { color: #556; font-size: 14px }
+.weather-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:8px; margin-top:12px }
+.weather-item { background:#fbfeff; padding:8px; border-radius:6px; border:1px solid #eef6f8 }
+.weather-label { font-size:12px; color:#667; }
+.weather-value { font-weight:600 }
+.weather-form { margin-bottom:12px }
+
+a:link {
+    color: orangered;
+    text-decoration: none;
+    padding:5px;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: tomato;
+    text-decoration: none;
+    padding:5px;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: orangered;
+    padding:5px;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+    text-decoration: none;
+    padding:5px;
+  }
+

@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- views/about.ejs - About page for Health & Fitness Tracker -->
+<html>
+  <head>
+    <title>About <%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+        }
+        p {
+            line-height: 1.6;
+            color: #333;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>About <%=shopData.shopName%></h1>
+        
+        <h2>Our Mission</h2>
+        <p>We are dedicated to helping individuals track and improve their health and fitness through a simple, intuitive application. Our goal is to empower users to take control of their fitness journey and achieve their health goals.</p>
+        
+        <h2>What We Offer</h2>
+        <p>Our Health & Fitness Tracker provides a comprehensive platform to:</p>
+        <ul>
+            <li><strong>Log Workouts:</strong> Record your fitness activities with details about duration and calories burned</li>
+            <li><strong>Track Health Metrics:</strong> Monitor weight, heart rate, steps, and sleep patterns</li>
+            <li><strong>Analyze Progress:</strong> View detailed reports and statistics about your health journey</li>
+            <li><strong>Search & Organize:</strong> Easily find and review your past workouts and health records</li>
+        </ul>
+        
+        <h2>Why Choose Us?</h2>
+        <p>Our application is designed with simplicity and effectiveness in mind. We believe that tracking your fitness should be straightforward and accessible. With an intuitive interface and powerful features, we help you stay motivated and achieve your fitness goals.</p>
+        
+        <h2>Get Started Today</h2>
+        <p>Join thousands of users who are already tracking their fitness journey. <a href="/users/register">Register now</a> to get started, or <a href="/users/login">login</a> if you already have an account.</p>
+        
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+  </body>
+</html>

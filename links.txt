@@ -1,0 +1,13 @@
+home=http://www.doc.gold.ac.uk/usr/292/
+about=http://www.doc.gold.ac.uk/usr/292/about
+dashboard=http://www.doc.gold.ac.uk/usr/292/dashboard
+login=http://www.doc.gold.ac.uk/usr/292/users/login
+register=http://www.doc.gold.ac.uk/usr/292/users/register
+log_workout=http://www.doc.gold.ac.uk/usr/292/workouts/addworkout
+workout_list=http://www.doc.gold.ac.uk/usr/292/workouts/list
+search_workouts=http://www.doc.gold.ac.uk/usr/292/workouts/search
+log_metrics=http://www.doc.gold.ac.uk/usr/292/metrics/add
+metrics_history=http://www.doc.gold.ac.uk/usr/292/metrics/history
+metrics_report=http://www.doc.gold.ac.uk/usr/292/metrics/report
+users_list=http://www.doc.gold.ac.uk/usr/292/users/list
+audit_log=http://www.doc.gold.ac.uk/usr/292/users/audit
