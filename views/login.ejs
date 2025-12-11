@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Login - <%= shopData.shopName %></title>
-    <link rel="stylesheet"  type="text/css" href="<%= BASE %>/main.css" />
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,7 +85,7 @@
   <body>
     <div class="container">
         <h1>🔐 Login</h1>
-        <form method="POST" action="<%= BASE %>/users/loggedin">
+        <form method="POST" action="loggedin">
           <div class="form-group">
             <label for="username">Username:</label>
             <input id="username" type="text" name="username" required />
@@ -98,9 +98,9 @@
         </form>
 
         <div class="links">
-          <a href="<%= BASE %>/">Home</a>
-          <a href="<%= BASE %>/users/register">Register</a>
-          <a href="<%= BASE %>/users/list">Users</a>
+          <a href="/">Home</a>
+          <a href="/users/register">Register</a>
+          <a href="/users/list">Users</a>
         </div>
     </div>
   </body>

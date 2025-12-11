@@ -91,7 +91,7 @@ router.get('/list', redirectLogin, function(req, res, next) {
 })
 // Display the login form
 router.get('/login', function(req, res, next) {
-  res.render('login.ejs', { BASE })
+  res.render('login.ejs')
 })
 
 // Handle login form submission: compare supplied password with stored hash

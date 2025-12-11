@@ -12,7 +12,7 @@ require('dotenv').config()
 // Create the express application object
 const app = express()
 const port = process.env.PORT || 8000
-const BASE = process.env.HEALTH_BASE_PATH || ''
+// BASE path not used in local setup
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(expressSanitizer())
 
 // Serve static assets from the `public` folder (CSS, client JS, images)
-app.use(BASE, express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Application-wide data available in EJS views via `shopData`
 app.locals.shopData = {shopName: "Health & Fitness Tracker"}
@@ -57,28 +57,28 @@ app.locals.BASE = BASE
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use(BASE + '/', mainRoutes)
+app.use('/', mainRoutes)
 
-// Convenience redirect: hitting root '/' goes to BASE home
+// Convenience redirect: hitting root '/' goes to home
 app.get('/', (req, res) => {
-    return res.redirect(BASE + '/')
+    return res.redirect('/')
 })
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use(BASE + '/users', usersRoutes)
+app.use('/users', usersRoutes)
 
 // Load the route handlers for /workouts
 const workoutsRoutes = require('./routes/workouts')
-app.use(BASE + '/workouts', workoutsRoutes)
+app.use('/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
-app.use(BASE + '/metrics', metricsRoutes)
+app.use('/metrics', metricsRoutes)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
-app.use(BASE + '/api', apiRoutes)
+app.use('/api', apiRoutes)
 
 // Start the web server
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
