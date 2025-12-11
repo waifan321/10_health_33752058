@@ -1,5 +1,27 @@
 # Create database script for Health and Fitness Tracker app
 
+# Users table to store registered users (username, names, email, hashed password)
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    hashedPassword VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+# Audit table to record login attempts (successful and failed)
+CREATE TABLE IF NOT EXISTS audit (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(50),
+    success TINYINT(1) NOT NULL,
+    event_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(45),
+    message VARCHAR(255),
+    PRIMARY KEY(id)
+);
+
 # Create the database
 CREATE DATABASE IF NOT EXISTS health;
 USE health;
@@ -36,24 +58,3 @@ CREATE TABLE IF NOT EXISTS health_metrics (
 CREATE USER IF NOT EXISTS 'health_app'@'localhost' IDENTIFIED BY 'qwertyuiop'; 
 GRANT ALL PRIVILEGES ON health.* TO 'health_app'@'localhost';
 
-# Users table to store registered users (username, names, email, hashed password)
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100),
-    hashedPassword VARCHAR(255) NOT NULL,
-    PRIMARY KEY(id)
-);
-
-# Audit table to record login attempts (successful and failed)
-CREATE TABLE IF NOT EXISTS audit (
-    id INT AUTO_INCREMENT,
-    username VARCHAR(50),
-    success TINYINT(1) NOT NULL,
-    event_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    ip_address VARCHAR(45),
-    message VARCHAR(255),
-    PRIMARY KEY(id)
-);
