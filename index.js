@@ -59,6 +59,11 @@ app.locals.BASE = BASE
 const mainRoutes = require("./routes/main")
 app.use(BASE + '/', mainRoutes)
 
+// Convenience redirect: hitting root '/' goes to BASE home
+app.get('/', (req, res) => {
+    return res.redirect(BASE + '/')
+})
+
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
 app.use(BASE + '/users', usersRoutes)
