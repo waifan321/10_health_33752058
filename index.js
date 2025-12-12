@@ -52,8 +52,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Application-wide data available in EJS views via `shopData`
 app.locals.shopData = {shopName: "Health & Fitness Tracker"}
-// Expose BASE to EJS views for building correct links
-app.locals.BASE = BASE
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")

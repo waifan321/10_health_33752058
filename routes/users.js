@@ -8,12 +8,9 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
-// Base path for Goldsmiths deployment
-const BASE = process.env.HEALTH_BASE_PATH || "";
-
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
-      res.redirect(BASE + '/users/login') // redirect to the login page
+      res.redirect('/users/login') // redirect to the login page
     } else { 
         next (); // move to the next middleware function
     } 
@@ -133,7 +130,7 @@ router.post('/loggedin', function(req, res, next) {
           const audParams = [username, 1, req.ip, 'login success']
           db.query(audSql, audParams, (aErr) => {
             if (aErr) return next(aErr)
-            return res.redirect(BASE + '/dashboard')
+            return res.redirect('/dashboard')
           })
         })
       }

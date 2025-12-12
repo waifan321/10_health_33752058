@@ -5,14 +5,10 @@ const router = express.Router();
 // Access the global database connection
 const db = global.db;
 
-// Base path for Goldsmiths deployment
-// Example: /~wfan002/10_health_33752058
-const BASE = process.env.HEALTH_BASE_PATH || "";
-
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect(BASE + '/users/login');
+        return res.redirect('/users/login');
     }
     next();
 };
@@ -20,7 +16,7 @@ const redirectLogin = (req, res, next) => {
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
 router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return res.redirect(BASE + '/dashboard');
+        return res.redirect('/dashboard');
     }
     res.render('index.ejs');
 });
@@ -53,9 +49,9 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
 router.get('/logout', redirectLogin, (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.redirect(BASE + '/');
+            return res.redirect('/');
         }
-        res.send(`You are now logged out. <a href="${BASE}/">Home</a>`);
+        res.send('You are now logged out. <a href="/">Home</a>');
     });
 });
 

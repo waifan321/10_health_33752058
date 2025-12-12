@@ -6,13 +6,10 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
-// Base path for Goldsmiths deployment
-const BASE = process.env.HEALTH_BASE_PATH || "";
-
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect(BASE + '/users/login')
+        return res.redirect('/users/login')
     }
     next()
 }
