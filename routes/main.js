@@ -5,10 +5,28 @@ const router = express.Router();
 // Access the global database connection
 const db = global.db;
 
+// Base path (optional); defaults to empty for localhost
+const BASE = process.env.HEALTH_BASE_PATH || '';
+
+// Helper to send an HTML meta-refresh redirect (instead of res.redirect)
+const sendRedirect = (res, target) => {
+    const url = `${BASE}${target}`;
+    res.send(`
+    <html>
+        <head>
+            <meta http-equiv="refresh" content="0; URL='${url}'" />
+        </head>
+        <body>
+            Redirecting... <a href="${url}">Click here if not redirected.</a>
+        </body>
+    </html>
+    `);
+};
+
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect('/users/login');
+        return sendRedirect(res, '/users/login');
     }
     next();
 };
@@ -16,7 +34,7 @@ const redirectLogin = (req, res, next) => {
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
 router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return res.redirect('/dashboard');
+        return sendRedirect(res, '/dashboard');
     }
     res.render('index.ejs');
 });
@@ -49,9 +67,9 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
 router.get('/logout', redirectLogin, (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.redirect('/');
+            return sendRedirect(res, '/');
         }
-        res.send('You are now logged out. <a href="/">Home</a>');
+        sendRedirect(res, '/');
     });
 });
 

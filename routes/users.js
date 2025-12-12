@@ -8,12 +8,30 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
+// Base path (optional); defaults to empty for localhost
+const BASE = process.env.HEALTH_BASE_PATH || ''
+
+// Helper to send an HTML meta-refresh redirect (instead of res.redirect)
+const sendRedirect = (res, target) => {
+  const url = `${BASE}${target}`
+  res.send(`
+  <html>
+    <head>
+      <meta http-equiv="refresh" content="0; URL='${url}'" />
+    </head>
+    <body>
+      Redirecting... <a href="${url}">Click here if not redirected.</a>
+    </body>
+  </html>
+  `)
+}
+
 const redirectLogin = (req, res, next) => {
-    if (!req.session.userId ) {
-      res.redirect('/users/login') // redirect to the login page
-    } else { 
-        next (); // move to the next middleware function
-    } 
+  if (!req.session.userId ) {
+    return sendRedirect(res, '/users/login') // redirect to the login page
+  } else { 
+    next (); // move to the next middleware function
+  } 
 }
 
 // Password validation: min 8 chars, at least 1 lowercase, 1 uppercase, 1 number, 1 special char
@@ -130,7 +148,7 @@ router.post('/loggedin', function(req, res, next) {
           const audParams = [username, 1, req.ip, 'login success']
           db.query(audSql, audParams, (aErr) => {
             if (aErr) return next(aErr)
-            return res.redirect('/dashboard')
+            return sendRedirect(res, '/dashboard')
           })
         })
       }

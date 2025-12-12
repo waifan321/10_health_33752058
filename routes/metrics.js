@@ -6,10 +6,28 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
+// Base path (optional); defaults to empty for localhost
+const BASE = process.env.HEALTH_BASE_PATH || ''
+
+// Helper to send an HTML meta-refresh redirect (instead of res.redirect)
+const sendRedirect = (res, target) => {
+    const url = `${BASE}${target}`
+    res.send(`
+    <html>
+        <head>
+            <meta http-equiv="refresh" content="0; URL='${url}'" />
+        </head>
+        <body>
+            Redirecting... <a href="${url}">Click here if not redirected.</a>
+        </body>
+    </html>
+    `)
+}
+
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect('/users/login')
+        return sendRedirect(res, '/users/login')
     }
     next()
 }
