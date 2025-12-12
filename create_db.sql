@@ -1,10 +1,5 @@
 # Create database script for Health and Fitness Tracker app
 
-# Create the database
-CREATE DATABASE IF NOT EXISTS health;
-USE health;
-
-# Create the tables
 # Users table to store registered users (username, names, email, hashed password)
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT,
@@ -27,6 +22,11 @@ CREATE TABLE IF NOT EXISTS audit (
     PRIMARY KEY(id)
 );
 
+# Create the database
+CREATE DATABASE IF NOT EXISTS health;
+USE health;
+
+# Create the tables
 # Workouts table to store fitness activities
 CREATE TABLE IF NOT EXISTS workouts (
     id     INT AUTO_INCREMENT,
