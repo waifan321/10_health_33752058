@@ -57,11 +57,6 @@ app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 const mainRoutes = require("./routes/main")
 app.use('/', mainRoutes)
 
-// Convenience redirect: hitting root '/' goes to home
-app.get('/', (req, res) => {
-    return res.redirect('/')
-})
-
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
 app.use('/users', usersRoutes)
