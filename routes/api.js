@@ -5,14 +5,13 @@ const router = express.Router()
 // Access the global database connection
 const db = global.db
 
-// Base path from env; empty locally, /usr/292 on doc.gold
-const BASE = process.env.HEALTH_BASE_PATH || '';
+
 
 // Middleware to require authentication
 const requireAuth = (req, res, next) => {
     if (!req.session || !req.session.userId) {
         // For API, keep JSON response to avoid HTML/redirects
-        return res.status(401).json({ error: 'Unauthorized', redirect: `${BASE}/users/login` })
+        return res.status(401).json({ error: 'Unauthorized', redirect: `/users/login` })
     }
     next()
 }

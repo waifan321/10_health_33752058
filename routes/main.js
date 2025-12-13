@@ -19,7 +19,7 @@ const redirectLogin = (req, res, next) => {
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
 router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return res.redirect(302, `${BASE}/dashboard`);
+        return res.redirect(302, `/dashboard`);
     }
     res.render('index.ejs');
 });
