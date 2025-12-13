@@ -57,7 +57,7 @@ app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use(BASE_PATH + '/', mainRoutes)
+app.use(BASE_PATH, mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
