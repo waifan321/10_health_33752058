@@ -64,23 +64,27 @@ app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use("/", mainRoutes)
+app.use(BASE_PATH, mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use("/users", usersRoutes)
+app.use(BASE_PATH + '/users', usersRoutes)
 
 // Load the route handlers for /workouts
 const workoutsRoutes = require('./routes/workouts')
-app.use('/workouts', workoutsRoutes)
+app.use(BASE_PATH + '/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
+<<<<<<< HEAD
 app.use('/metrics', metricsRoutes)
+=======
+app.use(BASE_PATH + '/metrics', metricsRoutes)
+>>>>>>> parent of 759be14 (last push)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
-app.use('/api', apiRoutes)
+app.use(BASE_PATH + '/api', apiRoutes)
 
 // Start the web server
 app.listen(port, () => console.log(`Server listening on port ${port} at base '${BASE_PATH}'`))
