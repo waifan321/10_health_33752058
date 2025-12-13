@@ -76,11 +76,7 @@ app.use(BASE_PATH + '/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
-<<<<<<< HEAD
 app.use('/metrics', metricsRoutes)
-=======
-app.use(BASE_PATH + '/metrics', metricsRoutes)
->>>>>>> parent of 759be14 (last push)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
