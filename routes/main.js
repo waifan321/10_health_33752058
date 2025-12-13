@@ -6,7 +6,7 @@ const router = express.Router();
 const db = global.db;
 
 // Base path from env; empty locally, set to /usr/292 on doc.gold
-const BASE = process.env.HEALTH_BASE_PATH || '/usr/292';
+const BASE = process.env.HEALTH_BASE_PATH || '';
 
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
@@ -30,7 +30,7 @@ router.get('/about',function(req, res, next){
 });
 
 // Dashboard route - shows user's health summary (requires login)
-router.get(`/${BASE}dashboard`, redirectLogin, function(req, res, next) {
+router.get(`/dashboard`, redirectLogin, function(req, res, next) {
     const userId = req.session.userId;
     
     // Get recent workouts
@@ -43,7 +43,7 @@ router.get(`/${BASE}dashboard`, redirectLogin, function(req, res, next) {
         db.query(metricsSql, [userId], (err, metrics) => {
             if (err) return next(err);
             
-            res.render(`${BASE}dashboard.ejs`, { workouts: workouts, metrics: metrics });
+            res.render(`dashboard.ejs`, { workouts: workouts, metrics: metrics });
         });
     });
 });

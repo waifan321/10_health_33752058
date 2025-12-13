@@ -96,6 +96,7 @@ router.get('/login', function(req, res, next) {
 
 // Handle login form submission: compare supplied password with stored hash
 router.post('/loggedin', function(req, res, next) {
+  console.log('Login attempt for user:', req.body.username)
   // sanitize username from input to avoid injection/XSS in logs
   const username = req.sanitize ? req.sanitize(req.body.username) : req.body.username
 
