@@ -13,7 +13,8 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 8000
 // Configurable base path for hosting under subdirectory (e.g., /usr/292 on doc.gold)
-const BASE_PATH = process.env.HEALTH_BASE_PATH || '/usr/292'
+// Defaults to '' locally so / works in development
+const BASE_PATH = process.env.HEALTH_BASE_PATH || ''
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')

@@ -6,8 +6,8 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
-// Absolute base path for reliable redirects under Apache subdirectory hosting
-const BASE = '/usr/292'
+// Base path from env; empty locally, /usr/292 on doc.gold
+const BASE = process.env.HEALTH_BASE_PATH || ''
 
 // Middleware to require a logged-in session for protected routes
 const redirectLogin = (req, res, next) => {

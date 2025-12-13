@@ -5,8 +5,8 @@ const router = express.Router()
 // Access the global database connection
 const db = global.db
 
-// Absolute base path for login redirect hints
-const BASE = '/usr/292';
+// Base path from env; empty locally, /usr/292 on doc.gold
+const BASE = process.env.HEALTH_BASE_PATH || '';
 
 // Middleware to require authentication
 const requireAuth = (req, res, next) => {

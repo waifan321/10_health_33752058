@@ -5,8 +5,8 @@ const router = express.Router();
 // Access the global database connection
 const db = global.db;
 
-// Absolute base path for reliable redirects under Apache subdirectory hosting
-const BASE = '/usr/292';
+// Base path from env; empty locally, set to /usr/292 on doc.gold
+const BASE = process.env.HEALTH_BASE_PATH || '';
 
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
@@ -51,7 +51,7 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
 // Logout route
 router.get('/logout', redirectLogin, (req, res) => {
     req.session.destroy(err => {
-        const target = `${BASE}/`;
+        const target = `${BASE || ''}/`;
         if (err) {
             return res.redirect(302, target);
         }
