@@ -12,7 +12,8 @@ require('dotenv').config()
 // Create the express application object
 const app = express()
 const port = process.env.PORT || 8000
-// BASE path not used in local setup
+// Configurable base path for hosting under subdirectory (e.g., /usr/292 on doc.gold)
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '/usr/292'
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
@@ -48,30 +49,31 @@ app.use(express.urlencoded({ extended: true }))
 app.use(expressSanitizer())
 
 // Serve static assets from the `public` folder (CSS, client JS, images)
-app.use(express.static(path.join(__dirname, 'public')))
+// Mount under BASE_PATH so assets resolve correctly on doc.gold
+app.use(BASE_PATH, express.static(path.join(__dirname, 'public')))
 
 // Application-wide data available in EJS views via `shopData`
 app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use('/', mainRoutes)
+app.use(BASE_PATH + '/', mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use('/users', usersRoutes)
+app.use(BASE_PATH + '/users', usersRoutes)
 
 // Load the route handlers for /workouts
 const workoutsRoutes = require('./routes/workouts')
-app.use('/workouts', workoutsRoutes)
+app.use(BASE_PATH + '/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
-app.use('/metrics', metricsRoutes)
+app.use(BASE_PATH + '/metrics', metricsRoutes)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
-app.use('/api', apiRoutes)
+app.use(BASE_PATH + '/api', apiRoutes)
 
 // Start the web server
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Server listening on port ${port} at base '${BASE_PATH}'`))
