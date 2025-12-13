@@ -12,7 +12,7 @@ const BASE = process.env.HEALTH_BASE_PATH || '';
 const requireAuth = (req, res, next) => {
     if (!req.session || !req.session.userId) {
         // For API, keep JSON response to avoid HTML/redirects
-        return res.status(401).json({ error: 'Unauthorized', redirect: `${BASE}/users/login` })
+        return res.status(401).json({ error: 'Unauthorized', redirect: `/users/login` })
     }
     next()
 }
