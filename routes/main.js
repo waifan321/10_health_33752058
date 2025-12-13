@@ -30,7 +30,7 @@ router.get('/about',function(req, res, next){
 });
 
 // Dashboard route - shows user's health summary (requires login)
-router.get('/dashboard', redirectLogin, function(req, res, next) {
+router.get(`/${BASE}dashboard`, redirectLogin, function(req, res, next) {
     const userId = req.session.userId;
     
     // Get recent workouts
@@ -43,7 +43,7 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
         db.query(metricsSql, [userId], (err, metrics) => {
             if (err) return next(err);
             
-            res.render(BASE + 'dashboard.ejs', { workouts: workouts, metrics: metrics });
+            res.render(`${BASE}dashboard.ejs`, { workouts: workouts, metrics: metrics });
         });
     });
 });
