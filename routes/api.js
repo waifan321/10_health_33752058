@@ -6,7 +6,7 @@ const router = express.Router()
 const db = global.db
 
 // Base path (optional); defaults to empty for localhost
-const BASE = process.env.HEALTH_BASE_PATH || ''
+const BASE = process.env.HEALTH_BASE_PATH || '/usr/292'
 
 // Helper to send an HTML meta-refresh redirect; used for unauthorized HTML clients
 const sendRedirect = (res, target) => {
