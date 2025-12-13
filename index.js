@@ -49,30 +49,25 @@ app.use(express.urlencoded({ extended: true }))
 // Create an input sanitizer (protects against basic XSS in text fields)
 app.use(expressSanitizer())
 
-// Make base path available to all views
-app.use((req, res, next) => {
-    res.locals.BASE_PATH = BASE_PATH;
-    next();
-});
 
 // Serve static assets from the `public` folder (CSS, client JS, images)
 // Mount under BASE_PATH so assets resolve correctly on doc.gold
-app.use(BASE_PATH, express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Application-wide data available in EJS views via `shopData`
 app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use(BASE_PATH, mainRoutes)
+app.use('/main', mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use(BASE_PATH + '/users', usersRoutes)
+app.use('/users', usersRoutes)
 
 // Load the route handlers for /workouts
 const workoutsRoutes = require('./routes/workouts')
-app.use(BASE_PATH + '/workouts', workoutsRoutes)
+app.use('/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
@@ -80,7 +75,7 @@ app.use('/metrics', metricsRoutes)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
-app.use(BASE_PATH + '/api', apiRoutes)
+app.use('/api', apiRoutes)
 
 // Start the web server
 app.listen(port, () => console.log(`Server listening on port ${port} at base '${BASE_PATH}'`))
