@@ -134,7 +134,7 @@ router.post('/loggedin', function(req, res, next) {
           const audParams = [username, 1, req.ip, 'login success']
           db.query(audSql, audParams, (aErr) => {
             if (aErr) return next(aErr)
-            return res.redirect(302, `/dashboard`)
+            return res.redirect(302, `${BASE}/dashboard`)
           })
         })
       }

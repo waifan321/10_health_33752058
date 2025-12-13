@@ -11,7 +11,7 @@ const BASE = process.env.HEALTH_BASE_PATH || '';
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect(302, `/users/login`);
+        return res.redirect(302, `${BASE}/users/login`);
     }
     next();
 };
@@ -19,7 +19,7 @@ const redirectLogin = (req, res, next) => {
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
 router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return res.redirect(302, `/dashboard`);
+        return res.redirect(302, `${BASE}/dashboard`);
     }
     res.render('index.ejs');
 });
