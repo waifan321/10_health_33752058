@@ -57,26 +57,30 @@ app.use((req, res, next) => {
 
 // Serve static assets from the `public` folder (CSS, client JS, images)
 // Mount under BASE_PATH so assets resolve correctly on doc.gold
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(BASE_PATH, express.static(path.join(__dirname, 'public')))
 
 // Application-wide data available in EJS views via `shopData`
 app.locals.shopData = {shopName: "Health & Fitness Tracker"}
 
 // Load the route handlers
 const mainRoutes = require("./routes/main")
-app.use(mainRoutes)
+app.use(BASE_PATH, mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use('/users', usersRoutes)
+app.use(BASE_PATH + '/users', usersRoutes)
 
 // Load the route handlers for /workouts
 const workoutsRoutes = require('./routes/workouts')
-app.use('/workouts', workoutsRoutes)
+app.use(BASE_PATH + '/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
+<<<<<<< HEAD
 app.use('/metrics', metricsRoutes)
+=======
+app.use(BASE_PATH + '/metrics', metricsRoutes)
+>>>>>>> parent of 759be14 (last push)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
