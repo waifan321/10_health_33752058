@@ -48,6 +48,12 @@ app.use(express.urlencoded({ extended: true }))
 // Create an input sanitizer (protects against basic XSS in text fields)
 app.use(expressSanitizer())
 
+// Make base path available to all views
+app.use((req, res, next) => {
+    res.locals.BASE_PATH = BASE_PATH;
+    next();
+});
+
 // Serve static assets from the `public` folder (CSS, client JS, images)
 // Mount under BASE_PATH so assets resolve correctly on doc.gold
 app.use(BASE_PATH, express.static(path.join(__dirname, 'public')))

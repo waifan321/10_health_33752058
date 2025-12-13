@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Audit Log - <%= shopData.shopName %></title>
-    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <link rel="stylesheet"  type="text/css" href="<%= BASE_PATH %>/main.css" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -105,7 +105,7 @@
       <% } %>
 
       <div class="back-link">
-        <a href="/">Home</a> | <a href="/users/list">Users</a> | <a href="/users/register">Register</a>
+        <a href="<%= BASE_PATH %>/">Home</a> | <a href="<%= BASE_PATH %>/users/list">Users</a> | <a href="<%= BASE_PATH %>/users/register">Register</a>
       </div>
     </div>
   </body>

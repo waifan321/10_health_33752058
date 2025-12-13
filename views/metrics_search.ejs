@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Search Health Metrics</title>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="<%= BASE_PATH %>/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,7 +83,7 @@
             <p>Search your health metrics by date range to find trends and patterns in your health data.</p>
         </div>
         
-        <form action="/metrics/report" method="get">
+        <form action="<%= BASE_PATH %>/metrics/report" method="get">
             <div class="form-group">
                 <label for="start_date">Start Date:</label>
                 <input type="date" id="start_date" name="start_date" value="<%= new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0] %>">
@@ -98,7 +98,7 @@
         </form>
         
         <div class="back-link">
-            <a href="/metrics/history">← Back to History</a> | <a href="/">Home</a>
+            <a href="<%= BASE_PATH %>/metrics/history">← Back to History</a> | <a href="<%= BASE_PATH %>/">Home</a>
         </div>
     </div>
   </body>
