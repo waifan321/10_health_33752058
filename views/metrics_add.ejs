@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Log Health Metrics</title>
-    <link rel="stylesheet" type="text/css" href="<%= BASE_PATH %>/main.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,7 +78,7 @@
     <div class="container">
         <h1>📊 Log Today's Health Metrics</h1>
         
-        <form action="<%= BASE_PATH %>/metrics/added" method="post">
+        <form action="/metrics/added" method="post">
             <div class="form-group">
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" value="<%= new Date().toISOString().split('T')[0] %>">
@@ -117,7 +117,7 @@
         </form>
         
         <div class="back-link">
-            <a href="<%= BASE_PATH %>/metrics/history">← View History</a> | <a href="<%= BASE_PATH %>/">Home</a>
+            <a href="/metrics/history">← View History</a> | <a href="/">Home</a>
         </div>
     </div>
   </body>

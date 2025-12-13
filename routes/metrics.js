@@ -6,11 +6,13 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
+// Base path from env; empty locally, set to /usr/292 on doc.gold
+const BASE = process.env.HEALTH_BASE_PATH || ''
 
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect(302, `/users/login`)
+        return res.redirect(302, `${BASE}/users/login`)
     }
     next()
 }
