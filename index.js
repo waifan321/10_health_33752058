@@ -76,7 +76,7 @@ app.use('/workouts', workoutsRoutes)
 
 // Load the route handlers for /health-metrics
 const metricsRoutes = require('./routes/metrics')
-app.use(metrics', metricsRoutes)
+app.use('/metrics', metricsRoutes)
 
 // Load API routes (machine-readable endpoints)
 const apiRoutes = require('./routes/api')
