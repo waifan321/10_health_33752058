@@ -12,7 +12,7 @@ const BASE = process.env.HEALTH_BASE_PATH || ''
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return res.redirect(302, `${BASE}/users/login`)
+        return res.redirect(302, `/users/login`)
     }
     next()
 }
