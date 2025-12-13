@@ -5,28 +5,13 @@ const router = express.Router();
 // Access the global database connection
 const db = global.db;
 
-// Base path (optional); defaults to empty for localhost
-const BASE = process.env.HEALTH_BASE_PATH || '/usr/292';
-
-// Helper to send an HTML meta-refresh redirect (instead of res.redirect)
-const sendRedirect = (res, target) => {
-    const url = `${BASE}${target}`;
-    res.send(`
-    <html>
-        <head>
-            <meta http-equiv="refresh" content="0; URL='${url}'" />
-        </head>
-        <body>
-            Redirecting... <a href="${url}">Click here if not redirected.</a>
-        </body>
-    </html>
-    `);
-};
+// Absolute base path for reliable redirects under Apache subdirectory hosting
+const BASE = '/usr/292';
 
 // Middleware to require a logged-in session
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        return sendRedirect(res, '/users/login');
+        return res.redirect(302, `${BASE}/users/login`);
     }
     next();
 };
@@ -34,7 +19,7 @@ const redirectLogin = (req, res, next) => {
 // Home page route - redirects to dashboard if logged in, otherwise shows landing page
 router.get('/', function (req, res, next) {
     if (req.session && req.session.userId) {
-        return sendRedirect(res, '/dashboard');
+        return res.redirect(302, `${BASE}/dashboard`);
     }
     res.render('index.ejs');
 });
@@ -66,10 +51,11 @@ router.get('/dashboard', redirectLogin, function(req, res, next) {
 // Logout route
 router.get('/logout', redirectLogin, (req, res) => {
     req.session.destroy(err => {
+        const target = `${BASE}/`;
         if (err) {
-            return sendRedirect(res, '/');
+            return res.redirect(302, target);
         }
-        sendRedirect(res, '/');
+        return res.redirect(302, target);
     });
 });
 

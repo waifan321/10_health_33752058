@@ -8,29 +8,14 @@ const { check, validationResult } = require('express-validator');
 // Access the global database connection
 const db = global.db
 
-// Base path (optional); defaults to empty for localhost
-const BASE = process.env.HEALTH_BASE_PATH || '/usr/292'
-
-// Helper to send an HTML meta-refresh redirect (instead of res.redirect)
-const sendRedirect = (res, target) => {
-  const url = `${BASE}${target}`
-  res.send(`
-  <html>
-    <head>
-      <meta http-equiv="refresh" content="0; URL='${url}'" />
-    </head>
-    <body>
-      Redirecting... <a href="${url}">Click here if not redirected.</a>
-    </body>
-  </html>
-  `)
-}
+// Absolute base path for reliable redirects under Apache subdirectory hosting
+const BASE = '/usr/292'
 
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId ) {
-    return sendRedirect(res, '/users/login') // redirect to the login page
+    return res.redirect(302, `${BASE}/users/login`)
   } else { 
-    next (); // move to the next middleware function
+    next (); 
   } 
 }
 
@@ -144,11 +129,11 @@ router.post('/loggedin', function(req, res, next) {
         req.session.save((saveErr) => {
           if (saveErr) return next(saveErr)
           
-          const audSql = 'INSERT INTO audit (username, success, ip_address, message) VALUES (?,?,?,?)'
+            const audSql = 'INSERT INTO audit (username, success, ip_address, message) VALUES (?,?,?,?)'
           const audParams = [username, 1, req.ip, 'login success']
           db.query(audSql, audParams, (aErr) => {
             if (aErr) return next(aErr)
-            return sendRedirect(res, '/dashboard')
+            return res.redirect(302, `${BASE}/dashboard`)
           })
         })
       }

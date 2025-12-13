@@ -5,28 +5,13 @@ const router = express.Router()
 // Access the global database connection
 const db = global.db
 
-// Base path (optional); defaults to empty for localhost
-const BASE = process.env.HEALTH_BASE_PATH || '/usr/292';
-
-// Helper to send an HTML meta-refresh redirect; used for unauthorized HTML clients
-const sendRedirect = (res, target) => {
-    const url = `${BASE}${target}`
-    res.send(`
-    <html>
-        <head>
-            <meta http-equiv="refresh" content="0; URL='${url}'" />
-        </head>
-        <body>
-            Redirecting... <a href="${url}">Click here if not redirected.</a>
-        </body>
-    </html>
-    `)
-}
+// Absolute base path for login redirect hints
+const BASE = '/usr/292';
 
 // Middleware to require authentication
 const requireAuth = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-        // For API, keep JSON response to avoid HTML injection into API clients
+        // For API, keep JSON response to avoid HTML/redirects
         return res.status(401).json({ error: 'Unauthorized', redirect: `${BASE}/users/login` })
     }
     next()
