@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="<%= BASE_PATH %>/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -124,23 +124,23 @@
     <div class="container">
         <header>
             <h1>Welcome Back! 👋</h1>
-            <a href="/logout" class="logout">Logout</a>
+            <a href="<%= BASE_PATH %>/logout" class="logout">Logout</a>
         </header>
         
         <div class="actions-grid">
-            <a href="/workouts/addworkout" class="action-btn">
+            <a href="<%= BASE_PATH %>/workouts/addworkout" class="action-btn">
                 <div class="icon">🏃</div>
                 <h3>Log Workout</h3>
             </a>
-            <a href="metrics/add" class="action-btn">
+            <a href="<%= BASE_PATH %>/metrics/add" class="action-btn">
                 <div class="icon">📊</div>
                 <h3>Log Metrics</h3>
             </a>
-            <a href="workouts/search" class="action-btn">
+            <a href="<%= BASE_PATH %>/workouts/search" class="action-btn">
                 <div class="icon">🔍</div>
                 <h3>Search</h3>
             </a>
-            <a href="/metrics/report" class="action-btn">
+            <a href="<%= BASE_PATH %>/metrics/report" class="action-btn">
                 <div class="icon">📈</div>
                 <h3>Reports</h3>
             </a>
@@ -168,7 +168,7 @@
                             <% }); %>
                         </tbody>
                     </table>
-                    <a href="workouts/list" class="view-all">View all workouts →</a>
+                    <a href="<%= BASE_PATH %>/workouts/list" class="view-all">View all workouts →</a>
                 <% } else { %>
                     <div class="no-data">No workouts logged yet.</div>
                 <% } %>
@@ -195,7 +195,7 @@
                             <% }); %>
                         </tbody>
                     </table>
-                    <a href="metrics/history" class="view-all">View all metrics →</a>
+                    <a href="<%= BASE_PATH %>/metrics/history" class="view-all">View all metrics →</a>
                 <% } else { %>
                     <div class="no-data">No metrics logged yet.</div>
                 <% } %>

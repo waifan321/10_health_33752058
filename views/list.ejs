@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title><%= pageTitle || 'Workouts' %> - <%= shopData.shopName %></title>
-		<link rel="stylesheet"  type="text/css" href="/main.css" />
+		<link rel="stylesheet"  type="text/css" href="<%= BASE_PATH %>/main.css" />
 		<style>
 			body {
 				font-family: Arial, sans-serif;
@@ -84,9 +84,9 @@
 			<h1><%= pageTitle || '🏃 My Workouts' %></h1>
 			
 			<div class="actions">
-				<a href="/workouts/addworkout">+ Log Workout</a>
-				<a href="/workouts/search">🔍 Search</a>
-				<a href="/workouts/recent">📅 Recent</a>
+				<a href="<%= BASE_PATH %>/workouts/addworkout">+ Log Workout</a>
+				<a href="<%= BASE_PATH %>/workouts/search">🔍 Search</a>
+				<a href="<%= BASE_PATH %>/workouts/recent">📅 Recent</a>
 			</div>
 
 			<% if (workouts && workouts.length) { %>
@@ -115,12 +115,12 @@
 			<% } else { %>
 				<div class="no-data">
 					<p>No workouts logged yet.</p>
-					<a href="/workouts/addworkout">Start logging your workouts →</a>
+					<a href="<%= BASE_PATH %>/workouts/addworkout">Start logging your workouts →</a>
 				</div>
 			<% } %>
 
 			<div class="back-link">
-				<a href="/">Home</a> | <a href="/metrics/history">View Health Metrics</a>
+				<a href="<%= BASE_PATH %>/">Home</a> | <a href="<%= BASE_PATH %>/metrics/history">View Health Metrics</a>
 			</div>
 		</div>
 	</body>

@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Welcome to <%=shopData.shopName%></title>
-    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <link rel="stylesheet"  type="text/css" href="<%= BASE_PATH %>/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -133,18 +133,18 @@
         </header>
 
         <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/users/login">Login</a>
-            <a href="/users/register">Register</a>
+            <a href="<%= BASE_PATH %>/">Home</a>
+            <a href="<%= BASE_PATH %>/about">About</a>
+            <a href="<%= BASE_PATH %>/users/login">Login</a>
+            <a href="<%= BASE_PATH %>/users/register">Register</a>
         </nav>
 
         <div class="hero">
             <h2>Welcome to Your Fitness Journey</h2>
             <p>Track your workouts, monitor your health metrics, and achieve your fitness goals with our comprehensive health and fitness tracker.</p>
             <p>
-                <a href="/users/login" class="btn-large">Login</a>
-                <a href="/users/register" class="btn-large">Get Started</a>
+                <a href="<%= BASE_PATH %>/users/login" class="btn-large">Login</a>
+                <a href="<%= BASE_PATH %>/users/register" class="btn-large">Get Started</a>
             </p>
         </div>
 
@@ -152,22 +152,22 @@
             <div class="feature-card">
                 <h3>🏃 Log Workouts</h3>
                 <p>Record your fitness activities including type, duration, and calories burned.</p>
-                <a href="/users/login">Start Logging</a>
+                <a href="<%= BASE_PATH %>/users/login">Start Logging</a>
             </div>
             <div class="feature-card">
                 <h3>📊 Health Metrics</h3>
                 <p>Track your weight, heart rate, steps, and sleep patterns daily.</p>
-                <a href="/users/login">Track Metrics</a>
+                <a href="<%= BASE_PATH %>/users/login">Track Metrics</a>
             </div>
             <div class="feature-card">
                 <h3>📈 Progress Reports</h3>
                 <p>View detailed reports and statistics about your fitness progress.</p>
-                <a href="/users/login">View Reports</a>
+                <a href="<%= BASE_PATH %>/users/login">View Reports</a>
             </div>
             <div class="feature-card">
                 <h3>🔍 Search & Analyze</h3>
                 <p>Search through your workouts and metrics to find patterns.</p>
-                <a href="/users/login">Search</a>
+                <a href="<%= BASE_PATH %>/users/login">Search</a>
             </div>
         </div>
     </div>

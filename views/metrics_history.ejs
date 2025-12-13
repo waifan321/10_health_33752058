@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Health Metrics History</title>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="<%= BASE_PATH %>/main.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,8 +79,8 @@
         <h1>📋 Your Health Metrics History</h1>
         
         <div class="actions">
-            <a href="/metrics/add">+ Add New Metrics</a>
-            <a href="/metrics/report">📊 View Report</a>
+            <a href="<%= BASE_PATH %>/metrics/add">+ Add New Metrics</a>
+            <a href="<%= BASE_PATH %>/metrics/report">📊 View Report</a>
         </div>
         
         <% if (metrics && metrics.length > 0) { %>
@@ -111,12 +111,12 @@
         <% } else { %>
             <div class="no-data">
                 <p>No health metrics recorded yet.</p>
-                <a href="/metrics/add">Add your first metrics →</a>
+                <a href="<%= BASE_PATH %>/metrics/add">Add your first metrics →</a>
             </div>
         <% } %>
         
         <div class="back-link">
-            <a href="/">← Back to Home</a>
+            <a href="<%= BASE_PATH %>/">← Back to Home</a>
         </div>
     </div>
   </body>
